@@ -4,7 +4,7 @@ import Style from "../../Components/TokenList/TokenList.module.css";
 import images from "../../assets";
 
 const TokenList = ({ tokenDate, setOpenTokenBox }) => {
-  const data = [1, 2, 3, 4, 5, 6, 7];
+  const data = [1, 2, 3, 4, 5];
   return (
     <div className={Style.TokenList}>
       <p

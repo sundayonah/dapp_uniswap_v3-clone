@@ -19,6 +19,21 @@
   align-items: center;
   justify-content: space-between;
 }
+/* .HeroSection_box_input_imgage {
+  align-items: center;
+  margin: 1rem;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1111111;
+} */
+.img {
+  background-color: #1e1e1e;
+  margin-left: 45%;
+  color: #cff80b;
+  cursor: pointer;
+  z-index: 1000;
+}
+
 .HeroSection_box_heading_img {
   cursor: pointer;
 }
@@ -31,6 +46,7 @@
   justify-content: space-between;
   border: 1px solid #cff80b;
   border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
   padding-left: 2rem;
   margin-top: 1rem;
 }

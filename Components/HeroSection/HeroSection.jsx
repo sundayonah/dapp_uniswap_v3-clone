@@ -12,6 +12,7 @@ const HeroSection = ({ accounts, tokenData }) => {
   const [openSetting, setOpenSetting] = useState(false);
   const [openToken, setOpenToken] = useState(false);
   const [openTokensTwo, setOpenTokensTwo] = useState(false);
+  const Switch = ({}) => {};
 
   //TOKEN
   const [tokenOne, setTokenOne] = useState({
@@ -30,6 +31,7 @@ const HeroSection = ({ accounts, tokenData }) => {
       <div className={Style.HeroSection_box}>
         <div className={Style.HeroSection_box_heading}>
           <p>Swap</p>
+
           <div className={Style.HeroSection_box_heading_img}>
             <Image
               src={images.cross}
@@ -53,18 +55,18 @@ const HeroSection = ({ accounts, tokenData }) => {
               alt="ether"
             />
             {tokenOne.name || "ETH"}
-            <small>8798</small>
+            <small>878</small>
           </button>
         </div>
-        {/* <div>
+        <div className={Style.img}>
           <Image
             src={images.arrow}
             alt="arrow"
             width={20}
             hieght={20}
-            className={Style.HeroSection_box_heading_img}
+            onClick={() => Switch()}
           />
-        </div> */}
+        </div>
         <div className={Style.HeroSection_box_input}>
           <input type="text" placeholder="0" />
           <button
