@@ -1,23 +1,32 @@
-
 const hre = require("hardhat");
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
+  //ERC20 BOOTOKEN
+  const BooToken = await hre.ethers.getContractFactory("BooToken");
+  const booToken = await BooToken.deploy();
+  await booToken.deployed();
+  console.log(`boo deployed to ${booToken.address}`);
 
-  const lockedAmount = hre.ethers.utils.parseEther("1");
+  //ERC20 LIFETOKEN
+  const LifeToken = await hre.ethers.getContractFactory("LifeToken");
+  const lifeToken = await LifeToken.deploy();
+  await lifeToken.deployed();
+  console.log(` life deployed to ${lifeToken.address}`);
 
-  const Lock = await hre.ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
-
-  await lock.deployed();
-
-  console.log(
-    `Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`
+  //SingleSwapToken
+  const SingleSwapToken = await hre.ethers.getContractFactory(
+    "SingleSwapToken"
   );
-}
+  const singleSwapToken = await SingleSwapToken.deploy();
+  await singleSwapToken.deployed();
+  console.log(` singleswaptoken deployed to ${singleSwapToken.address}`);
 
+  //SwapMultiHop
+  const SwapMultiHop = await hre.ethers.getContractFactory("SwapMultiHop");
+  const swapMultiHop = await SwapMultiHop.deploy();
+  await swapMultiHop.deployed();
+  console.log(`swapmultihop deployed to ${swapMultiHop.address}`);
+}
 
 main().catch((error) => {
   console.error(error);

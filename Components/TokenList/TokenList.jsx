@@ -2,9 +2,16 @@ import React from "react";
 import Image from "next/image";
 import Style from "../../Components/TokenList/TokenList.module.css";
 import images from "../../assets";
+import { id } from "ethers/lib/utils";
 
-const TokenList = ({ tokenDate, setOpenTokenBox }) => {
-  const data = [1, 2, 3, 4, 5];
+const TokenList = ({ tokenData, setOpenTokenBox }) => {
+  // console.log("token data by me", tokenData);
+
+  let tokenList = [];
+  for (let i = 0; i < tokenData.lenght; i++) {
+    if (i % 2 == 1) tokenList.push(tokenData[i]);
+  }
+
   return (
     <div className={Style.TokenList}>
       <p
@@ -16,12 +23,13 @@ const TokenList = ({ tokenDate, setOpenTokenBox }) => {
       <div className={Style.TokenList_title}>
         <h2>Your Token List</h2>
       </div>
-      {data.map((el, i) => (
-        <div className={Style.TokenList_box}>
+      {tokenList.map((el, i) => (
+        <div key={id} className={Style.TokenList_box}>
           <div className={Style.TokenList_box_info}>
-            <p className={Style.TokenList_box_info_symbol}>HEY</p>
+            <p className={Style.TokenList_box_info_symbol}>{el.name}</p>
             <p>
-              <span>34</span>GOLD COIN
+              <span>{el.tokenBalance}</span>
+              {el.symbol}
             </p>
           </div>
         </div>

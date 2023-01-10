@@ -1,12 +1,15 @@
 import "../styles/globals.css";
 
 import { NavBar } from "../Components/index";
+import { SwapTokenContextProvider } from "../Context/SwapContext";
 
 function MyApp({ Component, pageProps }) {
   return (
     <div>
-      <NavBar />
-      <Component {...pageProps} />
+      <SwapTokenContextProvider>
+        <NavBar />
+        <Component {...pageProps} />
+      </SwapTokenContextProvider>
     </div>
   );
 }

@@ -50,6 +50,11 @@
   padding-left: 2rem;
   margin-top: 1rem;
 }
+.small {
+  display: flex;
+  justify-content: flex-end;
+  color: #cff80b;
+}
 .HeroSection_box_input input {
   border: 0;
   outline: 0;

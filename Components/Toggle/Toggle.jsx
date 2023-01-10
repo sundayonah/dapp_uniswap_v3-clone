@@ -18,7 +18,7 @@ const Toggle = ({ label }) => {
           <span className={Style.Toggle_switch} />
         </labe>
       </div>
-    </div> 
+    </div>
   );
 };
 

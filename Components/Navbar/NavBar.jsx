@@ -1,14 +1,19 @@
 import React, { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { ethers } from "ethers";
+import web3Connect from "../../Layout/web3Connect";
 
 //import internal
 import Style from "../../Components/Navbar/NavBar.module.css";
 import { Model, TokkenList } from "../index";
 import images from "../../assets";
 import TokenList from "../TokenList/TokenList";
+import { SwapTokenContext } from "../../Context/SwapContext";
 
 const Navbar = () => {
+  const { ether, account, networkConnect, connectWallet, tokenData } =
+    useContext(SwapTokenContext);
   const menuItems = [
     {
       name: "Swap",
@@ -25,10 +30,24 @@ const Navbar = () => {
   ];
 
   //USESTATE
-
   const [openModel, setOpenModel] = useState(false);
   const [openTokenBox, setOpenTokenBox] = useState(false);
-  const [account, setaccount] = useState(false);
+  // const [account, setaccount] = useState(false);
+  // const [wallet, setWwallet] = useState("");
+
+  // async function connectWallet() {
+  //   if (typeof window.ethereum !== "undefine") {
+  //     //   await requestAccounts();
+  //     const provider = new ethers.providers.Web3Provider(window.ethereum);
+  //     await provider.send("eth_requestAccounts", []);
+  //     setWwallet(account[0]);
+  //     const signer = provider.getSigner();
+  //   }
+  // }
+
+  // if (window.ethereum) {
+  //   console.log("detected");
+  // }
 
   return (
     <div className={Style.NavBar}>
@@ -69,10 +88,20 @@ const Navbar = () => {
             <div className={Style.NavBar_box_right_box_img}>
               <Image src={images.ether} alt="Network" hieght={15} width={15} />
             </div>
-            <p>Network Name</p>
+            {/* <button onClick={() => navigator.clipboard.writeText({ account })}>
+              {account}
+            </button> */}
+            <p>{networkConnect}</p>
           </div>
-
           {account ? (
+            <button
+              onClick={() => {
+                setOpenTokenBox(true);
+              }}
+            >
+              {account.slice(0, 7)}...
+            </button>
+          ) : (
             <button
               onClick={() => {
                 setOpenModel(true);
@@ -80,24 +109,15 @@ const Navbar = () => {
             >
               Connect
             </button>
-          ) : (
-            <button
-              onClick={() => {
-                setOpenTokenBox(true);
-              }}
-            >
-              0xxsdss....
-            </button>
           )}
-
           {openModel && (
-            <Model setOpenModel={setOpenModel} connectWallet="Connect" />
+            <Model setOpenModel={setOpenModel} connectWallet={connectWallet} />
           )}
         </div>
       </div>
       {/* Token component */}
       {openTokenBox && (
-        <TokenList tokenDate="hey" setOpenTokenBox={setOpenTokenBox} />
+        <TokenList tokenData={tokenData} setOpenTokenBox={setOpenTokenBox} />
       )}
     </div>
   );

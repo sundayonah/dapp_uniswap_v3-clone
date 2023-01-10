@@ -58,7 +58,7 @@ const SearchToken = ({ openToken, tokens, tokenData }) => {
           <div className={Style.SearchToken_box_heading_img}>
             <Image
               src={images.cross}
-              alt="close"
+              alt="close" 
               width={50}
               height={50}
               onClick={() => openToken(false)}

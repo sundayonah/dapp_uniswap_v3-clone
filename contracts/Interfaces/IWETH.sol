@@ -1,8 +1,12 @@
-//SPDX-License-identifier: GPL-2.0-or-later
-pragma soidity >=0.7.0 < 0.9.0;
-interface IWETH {
-    function deposite() external payable;
+// //SPDX-License-Identifier: MIT
 
+
+
+
+pragma solidity >=0.7.0 <0.9.0;
+
+interface IWETH {
+    function deposit() external payable;
     function withdraw(uint) external;
     function totalSuply() external view returns (uint);
     function balanceOf (address account) external view returns(uint);
@@ -12,6 +16,4 @@ interface IWETH {
     function transferFrom(address sender, address recipient, uint amount) external returns (bool);
     event Transfer(address indexed from, address indexed to, uint value);
     event Approve(address indexed owner, address indexed spender, uint value);
-
-
-}
+    }

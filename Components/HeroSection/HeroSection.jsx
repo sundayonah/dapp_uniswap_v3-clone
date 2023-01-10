@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Image from "next/image";
 
 //INTERNAL IMPORT
@@ -6,22 +6,27 @@ import Image from "next/image";
 import Style from "./HeroSection.module.css";
 import images from "../../assets";
 import { Token, SearchToken } from "../index";
-const HeroSection = ({ accounts, tokenData }) => {
-  //usestate
+// import { Herosection } from "../Components/index";
+import { ethers, providers } from "ethers";
+import { SwapTokenContext } from "../../Context/SwapContext";
 
+const HeroSection = ({ tokenData }) => {
+  //USESTATE
   const [openSetting, setOpenSetting] = useState(false);
   const [openToken, setOpenToken] = useState(false);
   const [openTokensTwo, setOpenTokensTwo] = useState(false);
   const Switch = ({}) => {};
+  const { singleSwapToken, connectWallet, account, dai, ether } =
+    useContext(SwapTokenContext);
 
   //TOKEN
   const [tokenOne, setTokenOne] = useState({
-    name: "",
+    name: "WETH",
     image: "",
   });
 
   const [tokenTwo, setTokenTwo] = useState({
-    name: "",
+    name: "USDC",
     image: "",
   });
 
@@ -55,9 +60,10 @@ const HeroSection = ({ accounts, tokenData }) => {
               alt="ether"
             />
             {tokenOne.name || "ETH"}
-            <small>878</small>
+            <small>{ether.slice(0, 7)}</small>
           </button>
         </div>
+
         <div className={Style.img}>
           <Image
             src={images.arrow}
@@ -80,17 +86,27 @@ const HeroSection = ({ accounts, tokenData }) => {
               alt="ether"
             />
             {tokenTwo.name || "ETH"}
-            <small>8798</small>
+            <small>{dai.slice(0, 7)}</small>
           </button>
         </div>
-        {accounts ? (
-          <button className={Style.HeroSection_box_btn}>Connect Wallet</button>
-        ) : (
-          <button className={Style.HeroSection_box_btn} onClick={() => {}}>
+
+        {account ? (
+          <button
+            className={Style.HeroSection_box_btn}
+            onClick={() => singleSwapToken()}
+          >
             Swap
+          </button>
+        ) : (
+          <button
+            onClick={() => connectWallet()}
+            className={Style.HeroSection_box_btn}
+          >
+            Connect Wallet
           </button>
         )}
       </div>
+
       {openSetting && <Token setOpenSetting={setOpenSetting} />}
 
       {openToken && (
